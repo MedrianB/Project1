@@ -19,7 +19,7 @@ template <typename T> class Inventory {
 public:
   // Write Your code
 
-  bool addNewItem(const Item<T> addedItem) {
+  void addNewItem(const Item<T> addedItem) {
     for (const auto &itemCheck : items) {
       if (itemCheck.name == addedItem.name &&
           itemCheck.expiration == addedItem.expiration &&
@@ -27,11 +27,11 @@ public:
           itemCheck.quantity == addedItem.quantity) {
 
         std::cout << "Item is already present in inventory" << '\n';
-        return false; // False, you do not need to add this item
+        return; //you do not need to add this item
       }
     }
     items.push_back(addedItem);
-    return true; // True, you do need to add this item
+    return; //you do need to add this item
   }
 
   void increaseQuantity(T name, int quantity) {
@@ -142,15 +142,15 @@ public:
     }
   }
 
-  bool schedule(const Appointment<T> apCWID) {
+  void schedule(const Appointment<T> apCWID) {
     for (const auto &checkCWID : ap) {
-      if (checkCWID.c_name == apCWID.c_name) {
+      if (checkCWID.CWID == apCWID.CWID) {
         std::cout << "You have already scheduled an appointment!!" << '\n';
-        return false;
+        return;
       }
     }
     ap.push_back(apCWID);
-    return true;
+    return;
   }
 
   void Total_appointments(T ap_date, T ap_time) {
@@ -164,7 +164,9 @@ public:
               << ", " << ap_time << "." << '\n';
   }
 
-  void removeRecent() { ap.pop_back(); }
+  void removeRecent() { 
+    ap.pop_back(); 
+  }
 
 private:
   std::vector<Appointment<T>> ap;
